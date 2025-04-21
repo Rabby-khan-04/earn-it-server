@@ -13,7 +13,14 @@ const createUser = asyncHandler(async (req, res) => {
   if (!userInfo)
     throw new ApiError(status.NOT_FOUND, "User info is required!!");
 
-  userInfo.role = "user";
+  userInfo.satisfied_rate = 0;
+  userInfo.completed_tasks = 0;
+  userInfo.completation_rate = 0;
+  userInfo.work_score = 0;
+  userInfo.balance = 0;
+  userInfo.avgOnlineHours = 0;
+  userInfo.earned = 0;
+  userInfo.status = "active";
   const existedUser = await userCollection.findOne({ email: userInfo.email });
   if (existedUser)
     throw new ApiError(
