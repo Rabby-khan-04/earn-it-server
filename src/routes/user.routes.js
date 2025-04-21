@@ -5,5 +5,6 @@ const router = Router();
 
 router.route("/user").post(UserController.createUser);
 router.route("/jwt").post(UserController.issueJWT);
+router.route("/logout").post(UserController.logoutUser);
 
 export default router;

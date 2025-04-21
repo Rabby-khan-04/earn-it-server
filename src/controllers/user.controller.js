@@ -53,6 +53,15 @@ const issueJWT = asyncHandler(async (req, res) => {
     .json(new ApiResponse(status.OK, { token }, "Authentication successful!!"));
 });
 
-const UserController = { createUser, issueJWT };
+const logoutUser = asyncHandler(async (req, res) => {
+  return res
+    .status(status.OK)
+    .clearCookie("token", cookieOptions)
+    .json(
+      new ApiResponse(status.OK, { success: true }, "Logged out successfully!!")
+    );
+});
+
+const UserController = { createUser, issueJWT, logoutUser };
 
 export default UserController;
