@@ -69,6 +69,19 @@ const logoutUser = asyncHandler(async (req, res) => {
     );
 });
 
-const UserController = { createUser, issueJWT, logoutUser };
+const getUserRole = asyncHandler(async (req, res) => {
+  const userRole = await userCollection.findOne(
+    { email: req?.user?.email },
+    { projection: { role: 1, email: 1 } }
+  );
+
+  return res
+    .status(status.OK)
+    .json(
+      new ApiResponse(status.OK, userRole, "User role fetched successfully!!")
+    );
+});
+
+const UserController = { createUser, issueJWT, logoutUser, getUserRole };
 
 export default UserController;
